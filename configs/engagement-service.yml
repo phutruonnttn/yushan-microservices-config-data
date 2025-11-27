@@ -55,6 +55,12 @@ spring:
       connection-timeout: 5
       read-timeout: 30
 
+  # Feign Circuit Breaker Configuration
+  cloud:
+    openfeign:
+      circuitbreaker:
+        enabled: true
+
   # Kafka Configuration
   kafka:
     bootstrap-servers: ${SPRING_KAFKA_BOOTSTRAP_SERVERS:localhost:9092}

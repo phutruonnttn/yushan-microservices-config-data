@@ -51,8 +51,14 @@ spring:
             max-idle: 8
             min-idle: 2
 
-    # Kafka Configuration
-    kafka:
+  # Feign Circuit Breaker Configuration
+  cloud:
+    openfeign:
+      circuitbreaker:
+        enabled: true
+
+  # Kafka Configuration
+  kafka:
       bootstrap-servers: ${SPRING_KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
       consumer:
         group-id: analytics-service
