@@ -51,11 +51,11 @@ spring:
             max-idle: 8
             min-idle: 2
 
-  # Feign Circuit Breaker Configuration
-  cloud:
-    openfeign:
-      circuitbreaker:
-        enabled: true
+    # Feign Circuit Breaker Configuration
+    cloud:
+      openfeign:
+        circuitbreaker:
+          enabled: true
 
   # Kafka Configuration
   kafka:
