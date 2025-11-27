@@ -135,6 +135,85 @@ spring:
     issuer: ${JWT_ISSUER:yushan-micro-service}
     algorithm: ${JWT_ALGORITHM:HS256}
 
+# Resilience4j Configuration
+resilience4j:
+  circuitbreaker:
+    instances:
+      content-service:
+        registerHealthIndicator: true
+        slidingWindowType: COUNT_BASED
+        slidingWindowSize: 20
+        minimumNumberOfCalls: 10
+        failureRateThreshold: 50
+        waitDurationInOpenState: 10s
+        permittedNumberOfCallsInHalfOpenState: 5
+        automaticTransitionFromOpenToHalfOpenEnabled: true
+        slowCallRateThreshold: 100
+        slowCallDurationThreshold: 5s
+      user-service:
+        registerHealthIndicator: true
+        slidingWindowType: COUNT_BASED
+        slidingWindowSize: 20
+        minimumNumberOfCalls: 10
+        failureRateThreshold: 50
+        waitDurationInOpenState: 10s
+        permittedNumberOfCallsInHalfOpenState: 5
+        automaticTransitionFromOpenToHalfOpenEnabled: true
+        slowCallRateThreshold: 100
+        slowCallDurationThreshold: 5s
+      gamification-service:
+        registerHealthIndicator: true
+        slidingWindowType: COUNT_BASED
+        slidingWindowSize: 20
+        minimumNumberOfCalls: 10
+        failureRateThreshold: 50
+        waitDurationInOpenState: 10s
+        permittedNumberOfCallsInHalfOpenState: 5
+        automaticTransitionFromOpenToHalfOpenEnabled: true
+        slowCallRateThreshold: 100
+        slowCallDurationThreshold: 5s
+      engagement-service:
+        registerHealthIndicator: true
+        slidingWindowType: COUNT_BASED
+        slidingWindowSize: 20
+        minimumNumberOfCalls: 10
+        failureRateThreshold: 50
+        waitDurationInOpenState: 10s
+        permittedNumberOfCallsInHalfOpenState: 5
+        automaticTransitionFromOpenToHalfOpenEnabled: true
+        slowCallRateThreshold: 100
+        slowCallDurationThreshold: 5s
+  retry:
+    instances:
+      content-service:
+        maxAttempts: 3
+        waitDuration: 1000ms
+        retryExceptions:
+          - java.net.SocketTimeoutException
+          - java.util.concurrent.TimeoutException
+          - org.springframework.web.client.ResourceAccessException
+      user-service:
+        maxAttempts: 3
+        waitDuration: 1000ms
+        retryExceptions:
+          - java.net.SocketTimeoutException
+          - java.util.concurrent.TimeoutException
+          - org.springframework.web.client.ResourceAccessException
+      gamification-service:
+        maxAttempts: 3
+        waitDuration: 1000ms
+        retryExceptions:
+          - java.net.SocketTimeoutException
+          - java.util.concurrent.TimeoutException
+          - org.springframework.web.client.ResourceAccessException
+      engagement-service:
+        maxAttempts: 3
+        waitDuration: 1000ms
+        retryExceptions:
+          - java.net.SocketTimeoutException
+          - java.util.concurrent.TimeoutException
+          - org.springframework.web.client.ResourceAccessException
+
   # File Storage Configuration (for static resource serving only)
   app:
     storage:
